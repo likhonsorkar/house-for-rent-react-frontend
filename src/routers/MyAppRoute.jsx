@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router"
 import Home from "../pages/Home";
 import MainLayout from "../layouts/MainLayout";
-import Login from "../pages/login";
 import Ads from "../pages/Ads";
 import AdsDetails from "../pages/AdsDetails";
+import Login from "../pages/login";
 
 const MyAppRoute = () => {
     return (

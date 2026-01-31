@@ -93,8 +93,26 @@ const Header = () => {
                 }
             </div>
         </header>
-        {successMSG && (<span className="label-text-alt text-success">{successMSG}</span>)}
-        {errorMSG && (<span className="label-text-alt text-error"> {errorMSG} </span>)}
+        {(successMSG || errorMSG) && (
+                <div className={`w-full py-3 px-4 animate-in slide-in-from-top duration-300 border-b ${
+                    successMSG ? "bg-green-50 border-green-100" : "bg-red-50 border-red-100"
+                }`}>
+                    <div className="container mx-auto flex items-center justify-center gap-2">
+                        {successMSG ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        )}
+                        <span className={`text-sm font-bold ${successMSG ? "text-green-700" : "text-red-700"}`}>
+                            {successMSG || errorMSG}
+                        </span>
+                    </div>
+                </div>
+            )}
         </>
     );
 };

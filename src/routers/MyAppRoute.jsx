@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import MainLayout from "../layouts/MainLayout";
 import Ads from "../pages/Ads";
 import AdsDetails from "../pages/AdsDetails";
-import Login from "../pages/login";
+import Login from "../pages/Login";
 
 const MyAppRoute = () => {
     return (

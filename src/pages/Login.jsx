@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-
+// rename login.jsx
 const Login = () => {
     const {user, errorMSG, loginUser} = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}} = useForm();

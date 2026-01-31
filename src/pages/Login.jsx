@@ -32,7 +32,6 @@ const Login = () => {
                     <h2 className="text-2xl md:text-3xl font-black text-gray-800">Welcome Back</h2>
                     <p className="text-gray-500 text-sm mt-2">Find your perfect home today</p>
                 </div>
-                {errorMSG && (<span className="label-text-alt text-error"> {errorMSG} </span>)}
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
                     <div className="form-control">
                     <label className="label">

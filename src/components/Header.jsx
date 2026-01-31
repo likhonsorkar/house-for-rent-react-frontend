@@ -1,8 +1,9 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuthContext from "../hooks/useAuthContext";
 
 const Header = () => {
-    const {user} = useAuthContext();
+    const {user, logoutUser, successMSG, errorMSG} = useAuthContext();
+    const urlNavigator = useNavigate()
     const navLinks = (
         <>
         <li><Link to="/login" className="hover:text-orange-500 font-medium">Find a Home</Link></li>
@@ -17,7 +18,13 @@ const Header = () => {
         <li><a className="hover:text-orange-500 font-medium">How it works</a></li>
         </>
     );
+    const handleLogout = () => {
+        logoutUser();
+        urlNavigator("/login");
+    };
+
     return (
+        <>
         <header className="navbar bg-white/90 backdrop-blur-md border-b border-orange-100 sticky top-0 z-50 px-2 md:px-8">
             {/* MOBILE LEFT: Hamburger Menu */}
             <div className="navbar-start">
@@ -80,12 +87,15 @@ const Header = () => {
                         </a>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li><button onClick={handleLogout}>Logout</button></li>
                     </ul>
                 </div> )
                 }
             </div>
         </header>
+        {successMSG && (<span className="label-text-alt text-success">{successMSG}</span>)}
+        {errorMSG && (<span className="label-text-alt text-error"> {errorMSG} </span>)}
+        </>
     );
 };
 

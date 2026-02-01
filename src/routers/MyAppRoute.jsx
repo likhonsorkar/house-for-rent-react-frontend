@@ -5,6 +5,7 @@ import Ads from "../pages/Ads";
 import AdsDetails from "../pages/AdsDetails";
 import Login from "../pages/Login";
 import Registrations from "../pages/Registrations";
+import EmailActivation from "../components/EmailActivation";
 
 const MyAppRoute = () => {
     return (
@@ -15,6 +16,7 @@ const MyAppRoute = () => {
                 <Route path="/signup" element={<Registrations/>} />
                 <Route path="/homeads" element={<Ads/>}/>
                 <Route path="/homeads/1" element={<AdsDetails/>}/>
+                <Route path="/activate/:uid/:token" element={<EmailActivation/>} />
             </Route>
         </Routes>
     );

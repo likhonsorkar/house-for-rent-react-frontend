@@ -74,6 +74,7 @@ const useAuth = () => {
             if (error.response && error.response.data){
                 const errMsg = Object.values(error.response.data).flat().join("\n");
                 setErrorMSG(errMsg);
+                return false;
             }else{
                 setErrorMSG("Registration Failed! please try later")
             }
@@ -94,6 +95,16 @@ const useAuth = () => {
             return false;
         }
     }
-    return { user, errorMSG, successMSG,  logoutUser, loginUser, signupUser};
+    const emailActivation = async(data) => {
+        try{
+            const response = await apiClient.post("/auth/users/activation/", data);
+            console.log(response);
+            return true;
+        }catch (error) {
+            return false;
+        }
+    }
+    
+    return { user, errorMSG, successMSG,  logoutUser, loginUser, signupUser, emailActivation};
 }
 export default useAuth;

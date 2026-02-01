@@ -1,25 +1,26 @@
-import { useContext, useEffect } from "react";
+import { useContext , useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 // rename login.jsx
 const Login = () => {
-    const {user, errorMSG, loginUser} = useContext(AuthContext);
+    const {user, loginUser } = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const onSubmit = async(data) => {
+      setLoading(true)
       try {
         const succes = await  loginUser(data);
-      }catch (error){
-        console.log(error);
-      }
-    }
-
-    useEffect(() => {
-        if (user) {
+        if (succes){
             navigate("/");
         }
-    }, [user, navigate]);
+      }catch (error){
+        console.log(error);
+      }finally{
+        setLoading(false)
+    }
+    }
 
     return (
         <main className="min-h-screen lg:min-h-[85vh] flex items-center justify-center p-4 md:p-8 lg:p-12 relative overflow-hidden bg-orange-50/20">
@@ -59,15 +60,15 @@ const Login = () => {
                     <br />
                     {errors.password && (<span className="label-text-alt text-error"> {errors.password.message} </span>)}
                     </div>
-                    <button className="btn bg-orange-500 hover:bg-orange-600 border-none text-white w-full h-12 md:h-14 shadow-xl shadow-orange-100 text-lg">
-                    Sign In
+                    <button className="btn bg-orange-500 hover:bg-orange-600 border-none text-white w-full h-12 md:h-14 shadow-xl shadow-orange-100 text-lg" desabled={loading}>
+                    {loading ? "Signing In..." : "Sign In"}
                     </button>
                 </form>
 
                 <div className="divider my-6 md:my-8 text-xs text-gray-400 uppercase tracking-widest">or</div>
                 
                 <p className="text-center text-sm text-gray-500">
-                    New here? <a href="#" className="text-orange-600 font-black hover:underline">Create an account</a>
+                    New here? <Link to="/signup" className="text-orange-600 font-black hover:underline">Create an account</Link>
                 </p>
                 </div>
             </div>

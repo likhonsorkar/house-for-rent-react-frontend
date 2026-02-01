@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout";
 import Ads from "../pages/Ads";
 import AdsDetails from "../pages/AdsDetails";
 import Login from "../pages/Login";
+import Registrations from "../pages/Registrations";
 
 const MyAppRoute = () => {
     return (
@@ -11,6 +12,7 @@ const MyAppRoute = () => {
             <Route element={<MainLayout/>}>
                 <Route path="/" element={<Home/>} />
                 <Route path="/login" element={<Login/>} />
+                <Route path="/signup" element={<Registrations/>} />
                 <Route path="/homeads" element={<Ads/>}/>
                 <Route path="/homeads/1" element={<AdsDetails/>}/>
             </Route>

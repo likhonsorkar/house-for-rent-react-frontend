@@ -8,9 +8,7 @@ const useAuth = () => {
         const token = localStorage.getItem("authTokens");
         return token ? JSON.parse(token) : null ;
     }
-
     const [authTokens, setAuthTokens] = useState(getToken());
-
      const fetchUserProfile = async() => {
         setErrorMSG("");
         try{
@@ -30,10 +28,15 @@ const useAuth = () => {
 
     useEffect(() => {
         if (successMSG) {
-            const t = setTimeout(() => setSuccessMSG(""), 2000);
+            const t = setTimeout(() => setSuccessMSG(""), 4000);
             return () => clearTimeout(t);
         }
-    }, [successMSG]);
+
+        if (errorMSG) {
+            const t = setTimeout(() => setErrorMSG(""), 4000);
+            return () => clearTimeout(t);
+        }
+    }, [successMSG, errorMSG]);
     
     const loginUser = async(userData) =>{
         setSuccessMSG("")
@@ -42,14 +45,41 @@ const useAuth = () => {
             const response = await apiClient.post("/auth/jwt/create", userData);
             setAuthTokens(response.data)
             localStorage.setItem("authTokens", JSON.stringify(response.data));
-            setSuccessMSG("Login Successful");
+            setSuccessMSG("Wellcome Back!")
+            return true;
 
         }catch (error){
-             console.log(error);
+             if(error.response && error.response.status == 500){
+                setErrorMSG("Server error. Please try again later.");
+                return false;
+            }
              setErrorMSG(error.response.data?.detail);
+             return false;
         }
     }
-
+    const signupUser = async(userData) =>{
+        setSuccessMSG("")
+        setErrorMSG("");
+        try{
+            const response = await apiClient.post("/auth/users/", userData);
+            setSuccessMSG("Registration Successful. Check you email inbox/spam to active account");
+            if (response.status === 201 || response.status === 200) {
+                return true;
+            }
+        }catch (error) {
+            if(error.response && error.response.status == 500){
+                setErrorMSG("Server error. Please try again later.");
+                return false;
+            }
+            if (error.response && error.response.data){
+                const errMsg = Object.values(error.response.data).flat().join("\n");
+                setErrorMSG(errMsg);
+            }else{
+                setErrorMSG("Registration Failed! please try later")
+            }
+            return false;
+        }
+    }
     const logoutUser = () => {
         setSuccessMSG("")
         try{
@@ -57,12 +87,13 @@ const useAuth = () => {
             setAuthTokens(null); 
             setUser(null);
             setSuccessMSG("Logout Successful");
+            return true;
         }catch(error){
-            console.log(error)
-            setErrorMSG("Logout not successfull")
+            console.log(error);
+            setErrorMSG("Logout not successfull");
+            return false;
         }
     }
-
-    return { user, errorMSG, successMSG,  logoutUser, loginUser};
+    return { user, errorMSG, successMSG,  logoutUser, loginUser, signupUser};
 }
 export default useAuth;

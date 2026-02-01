@@ -64,9 +64,9 @@ const Header = () => {
                 {!user ? (
                 <div>
                     <Link to="/login" className="btn btn-ghost btn-sm md:btn-md text-gray-600 font-semibold px-2 md:px-4">Log In</Link>
-                    <button className="btn btn-sm md:btn-md bg-orange-500 hover:bg-orange-600 border-none text-white px-3 md:px-6 shadow-lg shadow-orange-200 rounded-full md:rounded-xl">
+                    <Link to="/signup" className="btn btn-sm md:btn-md bg-orange-500 hover:bg-orange-600 border-none text-white px-3 md:px-6 shadow-lg shadow-orange-200 rounded-full md:rounded-xl">
                     Sign Up
-                    </button>
+                    </Link>
                 </div>
                     ) : (
                 <div className="dropdown dropdown-end">

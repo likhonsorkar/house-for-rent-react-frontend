@@ -15,7 +15,7 @@ const MyAppRoute = () => {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Registrations/>} />
                 <Route path="/homeads" element={<Ads/>}/>
-                <Route path="/homeads/1" element={<AdsDetails/>}/>
+                <Route path="/homeads/:id" element={<AdsDetails/>}/>
                 <Route path="/activate/:uid/:token" element={<EmailActivation/>} />
             </Route>
         </Routes>

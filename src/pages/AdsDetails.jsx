@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import apiClient from '../services/api-client';
+import { useParams } from 'react-router';
 
 const AdsDetails = () => {
+    const {id} = useParams();
+    const [properties, setProperties] = useState();
+    const [images, setImages] = useState();
+    const [reviews, setReviews] = useState();
     const property = {
             id: 1,
             title: "Family Apartment DHAKA MIRPUR",
@@ -18,6 +24,16 @@ const AdsDetails = () => {
             contact_phone: "880181129",
             contact_email: "contact@likhon.com.bd",
         };
+      useEffect(()=>{
+        const data = async() =>{
+            const response = await apiClient.get(`/ads/${id}/`);
+            setProperties(response.data);
+            const responseimages = await apiClient.get(`/ads/${id}/images`);
+            setImages(responseimages.data);
+            console.log(responseimages.data);
+        }
+        data();
+      }, [])
     return (
       <main className="container mx-auto px-4 py-8">
         {/* 1. Image Gallery - Super Look Layout */}

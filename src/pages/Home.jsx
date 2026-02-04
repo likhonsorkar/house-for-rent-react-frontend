@@ -1,12 +1,35 @@
+import { useEffect, useState } from "react";
 import CTASection from "../components/CTASections";
 import FeaturedListings from "../components/FeaturedListings";
 import Hero from "../components/Hero";
+import apiClient from "../services/api-client";
 
 const Home = () => {
+    const [properties, setProperties] = useState({
+                    count: 0,
+                    next: null,
+                    previous: null,
+                    results: []
+                    });
+    const [status, setStatus] = useState("wait");
+    const query = async() => {
+        try{
+            const response = await apiClient.get("/ads/");
+             setProperties(response.data);
+             setStatus("success");
+             console.log(status, properties);
+        }catch(error){
+            setStatus("error");
+        }
+    }
+    useEffect(()=>{
+      query();
+    }, [])
     return (
     <main className="flex-grow">
         <Hero/>
-        <FeaturedListings />
+        {status == "wait" && (<div className='text-center m-2'><span className="loading loading-bars loading-xl text-orange-500"></span></div>)}
+        {status == "success" && (<FeaturedListings properties={properties.results.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 6)} />)}
         <CTASection />
       </main>
     );

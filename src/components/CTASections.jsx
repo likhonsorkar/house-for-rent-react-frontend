@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const CTASection = () => {
   return (
@@ -12,9 +13,9 @@ const CTASection = () => {
             <h2 className="text-3xl md:text-5xl font-black text-white mb-6">List your property with us today!</h2>
             <p className="text-orange-100 text-lg">Reach thousands of potential renters and get the best market value for your property.</p>
           </div>
-          <button className="btn bg-white hover:bg-orange-50 border-none text-orange-600 btn-lg rounded-full px-12 shadow-2xl font-black">
+          <Link to="/login?next=/dashboard" className="btn bg-white hover:bg-orange-50 border-none text-orange-600 btn-lg rounded-full px-12 shadow-2xl font-black">
             Get Started
-          </button>
+          </Link>
         </div>
       </div>
     </section>

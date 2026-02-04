@@ -6,14 +6,14 @@ const Header = () => {
     const urlNavigator = useNavigate()
     const navLinks = (
         <>
-        <li><Link to="/login" className="hover:text-orange-500 font-medium">Find a Home</Link></li>
+        <li><Link to="/property" className="hover:text-orange-500 font-medium">Find a Home</Link></li>
         <li><Link to="/login" className="hover:text-orange-500 font-medium">List Property</Link></li>
         <li><Link to="/login" className="hover:text-orange-500 font-medium">How it works</Link></li>
         </>
     );
     const authnavLinks = (
         <>
-        <li><a className="hover:text-orange-500 font-medium">Find a Home Auth</a></li>
+        <li><Link to="/property" className="hover:text-orange-500 font-medium">Find a Home</Link></li>
         <li><a className="hover:text-orange-500 font-medium">List Property</a></li>
         <li><a className="hover:text-orange-500 font-medium">How it works</a></li>
         </>

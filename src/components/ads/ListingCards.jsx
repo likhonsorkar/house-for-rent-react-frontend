@@ -33,7 +33,7 @@ const ListingCards = ({data}) => {
                 </div> */}
                 </div>
                 <div className="card-actions justify-end mt-4 border-t border-gray-50 pt-4">
-                <Link to={`/homeads/${data.id}`} className="btn btn-ghost btn-sm text-orange-600 font-bold hover:bg-orange-50">Details</Link>
+                <Link to={`/property/${data.id}`} className="btn btn-ghost btn-sm text-orange-600 font-bold hover:bg-orange-50">Details</Link>
                 <button className="btn btn-sm bg-orange-500 hover:bg-orange-600 border-none text-white px-4">Book Now</button>
                 </div>
             </div>

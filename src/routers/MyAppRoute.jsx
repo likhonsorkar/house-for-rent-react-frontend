@@ -15,9 +15,9 @@ import Profile from "../pages/dashboard/profile";
 import MyProperty from "../pages/dashboard/myproperty";
 import UpdateProperty from "../pages/dashboard/UpdateProperty";
 import ManagePropertyImages from "../pages/dashboard/ManagePropertyImages";
-import ApproveAds from "../pages/dashboard/ApproveAds";
 import ManageRequests from "../pages/dashboard/ManageRequests";
-import ProfileView from "../pages/ProfileView"; // New import
+import ProfileView from "../pages/ProfileView";
+import ApproveAds from "../pages/dashboard/approveads";
 
 const MyAppRoute = () => {
     return (

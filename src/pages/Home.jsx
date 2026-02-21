@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import CTASection from "../components/CTASections";
 import FeaturedListings from "../components/FeaturedListings";
 import Hero from "../components/Hero";
+import HowItWorks from "../components/HowItWorks";
+import Testimonials from "../components/Testimonials";
+import WhyChooseUs from "../components/WhyChooseUs";
 import apiClient from "../services/api-client";
 
 const Home = () => {
@@ -17,7 +20,6 @@ const Home = () => {
             const response = await apiClient.get("/ads/");
              setProperties(response.data);
              setStatus("success");
-             console.log(status, properties);
         }catch(error){
             setStatus("error");
         }
@@ -30,6 +32,9 @@ const Home = () => {
         <Hero/>
         {status == "wait" && (<div className='text-center m-2'><span className="loading loading-bars loading-xl text-orange-500"></span></div>)}
         {status == "success" && (<FeaturedListings properties={properties.results.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 6)} />)}
+        <WhyChooseUs />
+        <HowItWorks />
+        <Testimonials />
         <CTASection />
       </main>
     );

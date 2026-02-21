@@ -1,19 +1,21 @@
-import { useContext , useState } from "react";
+import { useContext , useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router";
 // rename login.jsx
 const Login = () => {
     const {user, loginUser } = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [param] = useSearchParams();
+    const next = param.get("next") || "/dashboard";
     const onSubmit = async(data) => {
       setLoading(true)
       try {
         const succes = await  loginUser(data);
         if (succes){
-            navigate("/dashboard");
+            navigate(next);
         }
       }catch (error){
         console.log(error);
@@ -21,7 +23,9 @@ const Login = () => {
         setLoading(false)
     }
     }
-
+    useEffect(()=>{
+       if (user) {navigate(next);}
+    }, [user,next, navigate])
     return (
         <main className="min-h-screen lg:min-h-[85vh] flex items-center justify-center p-4 md:p-8 lg:p-12 relative overflow-hidden bg-orange-50/20">
             {/* Responsive Decorative Background Blobs */}

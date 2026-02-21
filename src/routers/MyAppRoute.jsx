@@ -12,12 +12,12 @@ import NotFound from "../pages/NotFound";
 import AddProperty from "../pages/dashboard/AddProperty";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../pages/dashboard/profile";
-import MyProperty from "../pages/dashboard/myproperty";
 import UpdateProperty from "../pages/dashboard/UpdateProperty";
 import ManagePropertyImages from "../pages/dashboard/ManagePropertyImages";
 import ManageRequests from "../pages/dashboard/ManageRequests";
 import ProfileView from "../pages/ProfileView";
-import ApproveAds from "../pages/dashboard/approveads";
+import ApproveAds from "../pages/dashboard/ApproveAds";
+import MyProperty from "../pages/dashboard/MyProperty";
 
 const MyAppRoute = () => {
     return (

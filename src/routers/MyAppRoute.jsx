@@ -18,6 +18,11 @@ import ManageRequests from "../pages/dashboard/ManageRequests";
 import ProfileView from "../pages/ProfileView";
 import ApproveAds from "../pages/dashboard/ApproveAds";
 import MyProperty from "../pages/dashboard/MyProperty";
+import Invoice from "../pages/dashboard/Invoice";
+import WalletDashboard from "../pages/dashboard/Wallet";
+import PaymentFailed from "../pages/dashboard/PaymentFailed";
+import PaymentCancel from "../pages/dashboard/PaymentCancel";
+import PaymentSuccess from "../pages/dashboard/PaymentSuccess";
 
 const MyAppRoute = () => {
     return (
@@ -31,6 +36,9 @@ const MyAppRoute = () => {
                 <Route path="/profile/:id" element={<ProfileView/>} /> {/* New route */}
                 <Route path="/activate/:uid/:token" element={<EmailActivation/>} />
                 <Route path="*" element={<NotFound/>} />
+                <Route path="/payment/success" element={<PaymentSuccess/>} />
+                <Route path="/payment/failed" element={<PaymentFailed/>} />
+                <Route path="payment/cancel" element={<PaymentCancel/>} />
             </Route>
 
             <Route path="/dashboard" element={<PrivateRoute><DashboardLayout/></PrivateRoute>}>
@@ -42,6 +50,8 @@ const MyAppRoute = () => {
                 <Route path="updateproperty/:id" element={<UpdateProperty/>}/>
                 <Route path="property/:id/images" element={<ManagePropertyImages />} />
                 <Route path="approveads" element={<ApproveAds/>} />
+                <Route path="invoice" element={<Invoice/>} />
+                <Route path="wallet" element={<WalletDashboard/>} />
             </Route>
         </Routes>
     );

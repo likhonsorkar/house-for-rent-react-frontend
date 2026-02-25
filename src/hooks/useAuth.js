@@ -340,6 +340,6 @@ const useAuth = () => {
         }
     }
     
-    return { addReview, getReviews, getAdImages, getAdDetails, fetchMyAds, AddAdsImage, user, errorMSG, successMSG,  logoutUser, loginUser, signupUser, updateUserProfile, ChangePassword,  emailActivation, CreateAds, authTokens, updateAd, deleteAdImage, requestToRent, getAdRequests, acceptRequest, cancelRequest, getUserProfile};
+    return { addReview, getReviews, getAdImages, getAdDetails, fetchMyAds, AddAdsImage, user, errorMSG,  setErrorMSG, successMSG, setSuccessMSG,  logoutUser, loginUser, signupUser, updateUserProfile, ChangePassword,  emailActivation, CreateAds, authTokens, updateAd, deleteAdImage, requestToRent, getAdRequests, acceptRequest, cancelRequest, getUserProfile};
 }
 export default useAuth;

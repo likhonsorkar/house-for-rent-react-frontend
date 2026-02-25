@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router';
 import useAuthContext from '../../hooks/useAuthContext';
-import { LayoutGrid, Home, ThumbsUp, LogOut, Mail } from 'lucide-react';
+import { LayoutGrid, Home, ThumbsUp, LogOut, Mail, Wallet } from 'lucide-react';
 
 const Sidebar = () => {
     const {logoutUser, user} = useAuthContext();
@@ -32,6 +32,14 @@ const Sidebar = () => {
                     <NavLink to="/dashboard/requests" className={navLinkClasses}>
                         <Mail size={20} />
                         Rental Requests
+                    </NavLink>
+                    <NavLink to="/dashboard/invoice" className={navLinkClasses}>
+                        <Home size={20} />
+                        My Invoice
+                    </NavLink>
+                    <NavLink to="/dashboard/wallet" className={navLinkClasses}>
+                        <Wallet size={20} />
+                        My Wallet
                     </NavLink>
                     {user?.is_staff && (
                        <NavLink to="/dashboard/approveads" className={navLinkClasses}>

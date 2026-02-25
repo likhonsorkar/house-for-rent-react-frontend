@@ -36,7 +36,6 @@ const DashboardLayout = () => {
                         </Link>
                     </div>
                 </div>
-                <Outlet context={{ setHeading, loading, setLoading }}/>
 
                 {(successMSG || errorMSG) && (
                 <div className={`w-full py-3 px-4 animate-in slide-in-from-top duration-300 border-b ${
@@ -58,6 +57,7 @@ const DashboardLayout = () => {
                     </div>
                 </div>
             )}
+            <Outlet context={{ setHeading, loading, setLoading }}/>
             </main>  
         </div>
     );

@@ -11,7 +11,9 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setHeading("Platform Overview");
+        const title = "Overview";
+        document.title = title;
+        setHeading(title);
         if (user?.is_staff) {
             fetchStatistics();
         }

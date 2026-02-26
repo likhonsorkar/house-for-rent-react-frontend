@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
 import apiClient from '../../services/api-client';
 import { CheckCircle, Clock } from 'lucide-react';
+import { useOutletContext } from 'react-router';
 
 const ManageRequests = () => {
     const { authTokens, setErrorMSG, setSuccessMSG } = useAuthContext();
+    const { setHeading, setLoading, loading } = useOutletContext();
     const [requests, setRequests] = useState([]);
-    const [loading, setLoading] = useState(false);
     useEffect(()=> {
-
+        const title = "Manage Request"
+        document.title = title;
+        setHeading(title);
         fetchRequest();
     }, [])
     const fetchRequest = async() => {

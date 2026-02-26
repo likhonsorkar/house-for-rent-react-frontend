@@ -11,7 +11,9 @@ const ApproveAds = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setHeading("Approve Pending Ads");
+        const title = "Pending Ads"
+        document.title = title;
+        setHeading(title);
         fetchPendingAds();
     }, []);
 
@@ -30,19 +32,19 @@ const ApproveAds = () => {
         }
     };
 
-    const handleAction = async (id, actionType) => {
+    const handleAction = async (id) => {
         setLoading(true);
         try {
-            await apiClient.post(`/dashboard/ads/${id}/${actionType}/`, {}, {
+            await apiClient.post(`dashboard/ads/${id}/approve/`, {}, {
                 headers: { 'Authorization': `JWT ${authTokens?.access}` },
             });
-            setSuccessMSG(`Ad ${actionType === 'approve' ? 'Approved' : 'Rejected'} Successfully!`);
-            fetchPendingAds(); // Re-fetch ads to update the list
+            setSuccessMSG(`Ad Approved Successfully!`);
         } catch (error) {
             console.error("Action failed:", error);
-            setErrorMSG(`Failed to ${actionType === 'approve' ? 'approve' : 'reject'} ad. Try again.`);
+            setErrorMSG(`Failed to Approve ad. Try again.`);
         } finally {
             setLoading(false);
+            fetchPendingAds();
         }
     };
 
@@ -113,12 +115,12 @@ const ApproveAds = () => {
                                             </button>
 
                                 
-                                            <button 
+                                            {/* <button 
                                                 className="flex items-center justify-center p-3 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white hover:scale-105 transition-all duration-200 shadow-sm"
                                                 title="Reject"
                                             >
                                                 <XCircle size={20} />
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </td>
                                 </tr>

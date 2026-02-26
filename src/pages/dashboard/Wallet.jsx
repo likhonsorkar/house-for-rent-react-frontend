@@ -11,7 +11,9 @@ const WalletDashboard = () => {
     const { setHeading, setLoading, loading } = useOutletContext();
 
     useEffect(() => {
-        setHeading("My Wallet")
+        const title = "My Wallet"
+        document.title = title;
+        setHeading(title);
         fetchWalletData();
     }, []);
 

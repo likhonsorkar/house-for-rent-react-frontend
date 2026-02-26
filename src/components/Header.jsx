@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router";
 import useAuthContext from "../hooks/useAuthContext";
-import { LogOut, User, Settings } from 'lucide-react';
+import { LogOut, User, Settings, UserCircle, LayoutDashboard } from 'lucide-react';
 
 const Header = () => {
     const {user, logoutUser, successMSG, errorMSG} = useAuthContext();
@@ -75,16 +75,28 @@ const Header = () => {
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                        <img
-                            alt="User Profile"
-                            src={user.profile_image || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
+                            {user.profile_image ? (
+                                <img
+                                    alt="User Profile"
+                                    src={user.profile_image}
+                                />
+                            ) : (
+                                <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-400">
+                                    <UserCircle size={24} />
+                                </div>
+                            )}
                         </div>
                     </div>
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         <li>
-                            <Link to="/dashboard/profile" className="justify-between">
+                            <Link to="/dashboard">
+                                <LayoutDashboard size={16} /> Dashboard
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/dashboard/profile">
                                 <User size={16} /> Profile
                             </Link>
                         </li>

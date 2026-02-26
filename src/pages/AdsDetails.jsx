@@ -41,11 +41,14 @@ const AdsDetails = () => {
 
     useEffect(() => {
         fetchData();
-    }, [id, user]); // Added user to dependencies to re-fetch if user status changes
+    }, [id, user]);
+
+    if (properties){
+      document.title = properties?.title;
+    }
 
     const handleRequestToRent = async () => {
         if (!user) {
-            // Should not happen if button is conditionally rendered, but as a safeguard
             return;
         }
         setRequestStatus('sending');
@@ -58,7 +61,6 @@ const AdsDetails = () => {
     };
 
     const isOwner = user && properties?.owner === user.id;
-    const canRequest = user && !isOwner && requestStatus !== 'sent';
 
     return (
       <main className="container mx-auto px-4 py-8">

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router';
 
 const NotFound = () => {
+    useEffect(()=>{
+        const title = "House For Rent - Page Not Found";
+        document.title = title;
+    }, [])
     return (
         <main className="min-h-screen flex items-center justify-center p-6 bg-orange-50/20 relative overflow-hidden">
             {/* Background Decorations */}

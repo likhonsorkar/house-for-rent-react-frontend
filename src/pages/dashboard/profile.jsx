@@ -12,10 +12,12 @@ const Profile = () => {
     const [status, setStatus] = useState("idle");
 
     useEffect(() => {
-        setHeading("User Profile");
+        const title = "User Profile"
+        document.title = title;
+        setHeading(title);
     }, [setHeading]);
 
-    const { register, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
 
     useEffect(() => {
         if (user) {

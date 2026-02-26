@@ -24,6 +24,8 @@ const Login = () => {
     }
     }
     useEffect(()=>{
+        const title = "House For Rent - Login";
+        document.title = title;
        if (user) {navigate(next);}
     }, [user,next, navigate])
     return (

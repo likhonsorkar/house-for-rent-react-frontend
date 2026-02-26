@@ -23,6 +23,7 @@ import WalletDashboard from "../pages/dashboard/Wallet";
 import PaymentFailed from "../pages/dashboard/PaymentFailed";
 import PaymentCancel from "../pages/dashboard/PaymentCancel";
 import PaymentSuccess from "../pages/dashboard/PaymentSuccess";
+import UserList from "../pages/dashboard/UserList";
 
 const MyAppRoute = () => {
     return (
@@ -52,6 +53,7 @@ const MyAppRoute = () => {
                 <Route path="approveads" element={<ApproveAds/>} />
                 <Route path="invoice" element={<Invoice/>} />
                 <Route path="wallet" element={<WalletDashboard/>} />
+                <Route path="userlist" element={<UserList/>} />
             </Route>
         </Routes>
     );

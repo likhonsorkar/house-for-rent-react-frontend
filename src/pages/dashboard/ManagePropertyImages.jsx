@@ -43,7 +43,9 @@ const ManagePropertyImages = () => {
     };
 
     useEffect(() => {
-        setHeading("Manage Property Images");
+        const title = "Manage Images"
+        document.title = title;
+        setHeading(title);
         fetchAdAndImages();
     }, [id, setHeading, user]); // Added user to dependencies for ownership check
 

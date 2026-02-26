@@ -29,7 +29,9 @@ const MyProperty = () => {
     }
 
     useEffect(() => {
-        setHeading("My Properties");
+        const title = "My Properties"
+        document.title = title;
+        setHeading(title);
         query();
     }, []);
 

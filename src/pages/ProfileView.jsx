@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import useAuthContext from '../hooks/useAuthContext';
-import { User, Mail, Phone, MapPin, Info } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const ProfileView = () => {
     const { id } = useParams();
@@ -18,6 +18,7 @@ const ProfileView = () => {
                 const response = await getUserProfile(id);
                 if (response) {
                     setProfile(response.data);
+                    document.title = `${response.data.first_name} ${response.data.last_name} - User Profile`;
                 } else {
                     setError("Profile not found.");
                 }

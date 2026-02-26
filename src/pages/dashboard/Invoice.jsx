@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
 import apiClient from '../../services/api-client';
 import { CheckCircle, Clock, CreditCard } from 'lucide-react';
-import { redirect } from 'react-router';
+import { useOutletContext } from 'react-router';
 
 const Invoice = () => {
     const { authTokens, setErrorMSG, setSuccessMSG } = useAuthContext();
+    const { setHeading, setLoading, loading } = useOutletContext();
     const [invoices, setInvoices] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [payclick, setPayClick] = useState(false)
 
     useEffect(() => {
+        const title = "Invoice"
+        document.title = title;
+        setHeading(title);
         fetchInvoices();
     }, []);
 

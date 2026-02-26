@@ -21,7 +21,9 @@ const UpdateProperty = () => {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     useEffect(() => {
-        setHeading("Update Property");
+        const title = "Update Property"
+        document.title = title;
+        setHeading(title);
         setLoading(true);
         getAdDetails(id)
             .then(res => {

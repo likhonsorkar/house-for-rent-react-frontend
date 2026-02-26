@@ -28,6 +28,8 @@ const Ads = () => {
         bathrooms: "",
     });
     useEffect(() =>{
+        const title = "Property List";
+        document.title = title;
         query();
         }
          ,[currentPages]);

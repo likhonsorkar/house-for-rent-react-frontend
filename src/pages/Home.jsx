@@ -25,6 +25,8 @@ const Home = () => {
         }
     }
     useEffect(()=>{
+      const title = "House For Rent Homepage";
+      document.title = title;
       query();
     }, [])
     return (

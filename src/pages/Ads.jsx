@@ -56,10 +56,6 @@ const Ads = () => {
                     Available <span className="text-orange-500">Ads Listings</span>
                     <span className="ml-2 text-sm font-medium text-gray-400">({properties.count} results)</span>
                 </h1>
-                <div className="hidden md:flex gap-2">
-                    <button className="btn btn-sm btn-ghost border-gray-200">Newest First</button>
-                    <button className="btn btn-sm btn-ghost border-gray-200">Price: Low to High</button>
-                </div>
                 </div>
 
                 {/* Property Grid */}

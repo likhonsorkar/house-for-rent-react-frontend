@@ -12,7 +12,7 @@ const ListingCards = ({data}) => {
                 {data.category.toUpperCase()}
                 </div>
                 <div className="absolute bottom-3 right-3 bg-orange-500 text-white px-3 py-1 rounded-lg font-black text-lg">
-                ${data.rent}<span className="text-xs font-normal opacity-80">/{data.bill_time.toUpperCase()}</span>
+                ৳{data.rent}<span className="text-xs font-normal opacity-80">/{data.bill_time.toUpperCase()}</span>
                 </div>
             </figure>
             

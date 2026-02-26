@@ -6,7 +6,6 @@ import HowItWorks from "../components/HowItWorks";
 import Testimonials from "../components/Testimonials";
 import WhyChooseUs from "../components/WhyChooseUs";
 import apiClient from "../services/api-client";
-
 const Home = () => {
     const [properties, setProperties] = useState({
                     count: 0,

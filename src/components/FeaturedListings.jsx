@@ -1,7 +1,5 @@
-import React from 'react';
 import ListingCards from './ads/ListingCards';
 import { Link } from 'react-router';
-
 const FeaturedListings = ({properties}) => {
   return (
     <div className='container mx-auto px-4 py-12'>
@@ -22,5 +20,4 @@ const FeaturedListings = ({properties}) => {
     </div>
   );
 };
-
 export default FeaturedListings;

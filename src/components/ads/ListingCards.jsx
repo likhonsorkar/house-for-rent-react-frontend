@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router';
 import { BedDouble, Bath } from 'lucide-react';
 
@@ -15,7 +14,6 @@ const ListingCards = ({data}) => {
                 ৳{data.rent}<span className="text-xs font-normal opacity-80">/{data.bill_time.toUpperCase()}</span>
                 </div>
             </figure>
-            
             <div className="card-body p-5">
                     <h2 className="card-title text-lg font-bold text-gray-800 line-clamp-1">
                     {data.title}
@@ -38,5 +36,4 @@ const ListingCards = ({data}) => {
         </Link>
     );
 };
-
 export default ListingCards;

@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router';
-import AuthContext from '../context/AuthContext';
-
+import useAuthContext from '../hooks/useAuthContext';
 const EmailActivation = () => {
     const {uid, token} =  useParams();
     const [status, setStatus] = useState("wait");
-    const {emailActivation} = useContext(AuthContext);
-
+    const {emailActivation} = useAuthContext();
     useEffect(()=>{
       const activateAccount = async () => {
         try {
@@ -23,12 +21,10 @@ const EmailActivation = () => {
     };
     activateAccount();
     }, []);
-
     return (
         <main className="min-h-[90vh] flex items-center justify-center p-6 bg-orange-50/20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-72 h-72 bg-orange-200 rounded-full blur-3xl opacity-20 -z-10"></div>
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-orange-300 rounded-full blur-3xl opacity-20 -z-10"></div>
-
         <div className="max-w-md w-full bg-white/90 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white p-8 md:p-12 text-center">
             <div className="flex justify-center mb-8">
                 <div className="bg-orange-500 p-3 rounded-2xl shadow-lg shadow-orange-100">
@@ -49,9 +45,9 @@ const EmailActivation = () => {
                 <p className="text-gray-500 mb-8 font-medium leading-relaxed">
                     Your account has been successfully activated. You can now access all features.
                 </p>
-                <button className="btn bg-orange-500 hover:bg-orange-600 border-none text-white w-full h-14 shadow-xl shadow-orange-100 text-lg rounded-2xl font-bold">
+                <Link to="/login" className="btn bg-orange-500 hover:bg-orange-600 border-none text-white w-full h-14 shadow-xl shadow-orange-100 text-lg rounded-2xl font-bold">
                     Go to Login
-                </button>
+                </Link>
             </div>)}
             {status == "wrong" && (
                 <div className="mt-12 pt-12 border-t border-gray-100"> 
@@ -65,9 +61,6 @@ const EmailActivation = () => {
                     The activation code or URL is wrong. It may have expired or already been used.
                 </p>
                 <div className="space-y-3">
-                    {/* <button className="btn btn-outline border-orange-500 text-orange-600 hover:bg-orange-500 hover:border-orange-500 w-full h-14 rounded-2xl text-lg font-bold">
-                        Request New Link
-                    </button> */}
                     <Link to="/" className="btn btn-outline border-orange-500 text-orange-600 hover:bg-orange-500 hover:border-orange-500 w-full h-14 rounded-2xl text-lg font-bold">
                         Back to Home
                     </Link>

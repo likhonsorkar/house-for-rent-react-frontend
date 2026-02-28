@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router';
 import ImageGallary from '../components/ads/ImageGallary';
 import Review from '../components/reviews/Review';
 import ReviewForm from '../components/reviews/ReviewForm';
 import useAuthContext from '../hooks/useAuthContext';
 import { BedDouble, Bath, Calendar, MapPin, Tag, CalendarDays, Building } from 'lucide-react';
-
 const AdsDetails = () => {
     const {id} = useParams();
     const location = useLocation();
@@ -13,9 +12,8 @@ const AdsDetails = () => {
     const [properties, setProperties] = useState();
     const [images, setImages] = useState();
     const [reviews, setReviews] = useState([]);
-    const [requestStatus, setRequestStatus] = useState('idle'); // idle, sending, sent, error
-    const { user, getAdDetails, getAdImages, getReviews, requestToRent } = useAuthContext();
-    
+    const [requestStatus, setRequestStatus] = useState('');
+    const { user, getAdDetails, getAdImages, getReviews, requestToRent } = useAuthContext(); 
     const fetchData = async () => {
         setStatus('wait');
         try {
@@ -24,7 +22,6 @@ const AdsDetails = () => {
                 getAdImages(id),
                 getReviews(id)
             ]);
-            
             if (detailsRes) {
                 setProperties(detailsRes.data);
                 setImages(imagesRes ? imagesRes.data : []);
@@ -38,15 +35,12 @@ const AdsDetails = () => {
             setStatus("error");
         }
     };
-
     useEffect(() => {
         fetchData();
     }, [id, user]);
-
     if (properties){
       document.title = properties?.title;
     }
-
     const handleRequestToRent = async () => {
         if (!user) {
             return;
@@ -59,9 +53,7 @@ const AdsDetails = () => {
             setRequestStatus('error');
         }
     };
-
     const isOwner = user && properties?.owner === user.id;
-
     return (
       <main className="container mx-auto px-4 py-8">
         {status === "wait" && (<div className='text-center m-2'><span className="loading loading-bars loading-xl text-orange-500"></span></div>)}
@@ -84,7 +76,6 @@ const AdsDetails = () => {
                     {properties?.address}
                   </p>
                 </div>
-
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-orange-50/50 rounded-3xl border border-orange-100">
                   <div className="text-center flex flex-col items-center gap-2">
                     <BedDouble className="text-orange-500" size={28}/>
@@ -103,14 +94,12 @@ const AdsDetails = () => {
                     <span className="block text-gray-800 font-bold">From {new Date(properties?.avaiable_from).toLocaleDateString()}</span>
                   </div>
                 </div>
-
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-orange-500 pl-4">Description</h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
                     {properties?.description}
                   </p>
                 </div>
-
                 <div className="pt-8 border-t border-gray-100">
                   <Review reviews={reviews} adId={id} setReviews={setReviews} />
                   {user ? (
@@ -122,7 +111,6 @@ const AdsDetails = () => {
                   )}
                 </div>
               </div>
-
               <div className="lg:col-span-1">
                 <div className="sticky top-24 p-8 bg-white rounded-[2.5rem] border border-orange-100 shadow-[0_20px_60px_-15px_rgba(255,165,0,0.1)]">
                   <div className="flex justify-between items-end mb-8">
@@ -145,7 +133,6 @@ const AdsDetails = () => {
                       <span className="text-gray-800 font-bold">Not included</span>
                     </div>
                   </div>
-
                   <div className="space-y-3">
                     {user && !isOwner && requestStatus !== 'sent' && (
                         <button
@@ -166,12 +153,12 @@ const AdsDetails = () => {
                             Failed to Send Request.
                          </div>
                     )}
-                    {!user && ( // User not logged in
+                    {!user && ( 
                         <div className="bg-orange-50 text-orange-700 p-3 rounded-xl text-center font-bold">
                             <Link to={`/login?next=${location.pathname}`} className="text-orange-600 hover:underline">Login</Link> to request.
                         </div>
                     )}
-                    {isOwner && ( // Owner of the ad
+                    {isOwner && ( 
                         <div className="bg-gray-100 text-gray-700 p-3 rounded-xl text-center font-bold">
                             You own this property.
                         </div>

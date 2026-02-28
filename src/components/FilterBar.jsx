@@ -1,5 +1,3 @@
-import React from 'react';
-
 const FilterBar = ({ categories, filters, setFilters , onApply }) => {
   const handleChange = (key, value) => {
     setFilters(prev => ({
@@ -7,12 +5,10 @@ const FilterBar = ({ categories, filters, setFilters , onApply }) => {
       [key]: value,
     }));
   };
-  
   return (
     <div className="sticky top-[64px] z-40 bg-white/80 backdrop-blur-xl border-b border-orange-50 py-4 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap items-center gap-4 lg:gap-6">
-          {/* Category Filter */}
           <div className="form-control w-full md:w-auto min-w-[160px]">
             <label className="label py-1"><span className="label-text-alt font-bold text-gray-400 uppercase">Category</span></label>
             <select 
@@ -26,7 +22,6 @@ const FilterBar = ({ categories, filters, setFilters , onApply }) => {
                 </option>))}
             </select>
           </div>
-          {/* Bedrooms Filter */}
           <div className="form-control w-[45%] md:w-auto">
             <label className="label py-1"><span className="label-text-alt font-bold text-gray-400 uppercase">Bedrooms</span></label>
             <select 
@@ -39,7 +34,6 @@ const FilterBar = ({ categories, filters, setFilters , onApply }) => {
               <option value="3">3</option>
             </select>
           </div>
-          {/* Bathrooms Filter */}
           <div className="form-control w-[45%] md:w-auto">
             <label className="label py-1"><span className="label-text-alt font-bold text-gray-400 uppercase">Bathrooms</span></label>
             <select 
@@ -52,17 +46,14 @@ const FilterBar = ({ categories, filters, setFilters , onApply }) => {
               <option value="3">3</option>
             </select>
           </div>
-          {/* Apply Filter Button */}
           <div className="form-control w-full md:w-auto md:mt-6">
             <button onClick={onApply} className="btn btn-sm bg-orange-500 hover:bg-orange-600 border-none text-white px-8 shadow-md shadow-orange-100">
               Apply Filter
             </button>
           </div>
-
         </div>
       </div>
     </div>
   );
 };
-
 export default FilterBar;

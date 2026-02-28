@@ -1,8 +1,7 @@
 import { useContext , useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate, useParams, useSearchParams } from "react-router";
-// rename login.jsx
+import { Link, useNavigate, useSearchParams } from "react-router";
 const Login = () => {
     const {user, loginUser } = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -30,7 +29,6 @@ const Login = () => {
     }, [user,next, navigate])
     return (
         <main className="min-h-screen lg:min-h-[85vh] flex items-center justify-center p-4 md:p-8 lg:p-12 relative overflow-hidden bg-orange-50/20">
-            {/* Responsive Decorative Background Blobs */}
             <div className="absolute -top-10 -right-10 w-40 md:w-80 h-40 md:h-80 bg-orange-200 rounded-full blur-3xl opacity-20"></div>
             <div className="absolute -bottom-10 -left-10 w-40 md:w-80 h-40 md:h-80 bg-orange-300 rounded-full blur-3xl opacity-20"></div>
             <div className="card w-full max-w-md bg-white/90 backdrop-blur-xl border border-white shadow-2xl z-10">
@@ -55,7 +53,7 @@ const Login = () => {
                     <div className="form-control">
                     <label className="label">
                         <span className="label-text font-bold text-gray-600">Password</span>
-                        <a href="#" className="label-text-alt link link-hover text-orange-600 font-bold">Forgot?</a>
+                        <Link to="/password/reset" className="label-text-alt link link-hover text-orange-600 font-bold">Forgot?</Link>
                     </label>
                     <input 
                         type="password" 
@@ -81,5 +79,4 @@ const Login = () => {
         </main>
     );
 };
-
 export default Login;

@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useOutletContext } from 'react-router';
 import useAuthContext from '../../hooks/useAuthContext';
-import { User, Lock, Phone, Mail, MapPin } from 'lucide-react';
-
+import { User, Phone, MapPin } from 'lucide-react';
 const Profile = () => {
     const { setHeading } = useOutletContext();
     const { user, updateUserProfile, ChangePassword } = useAuthContext();
     const [editable, setEditable] = useState(false);
     const [showPasswordSection, setShowPasswordSection] = useState(false);
     const [status, setStatus] = useState("idle");
-
     useEffect(() => {
         const title = "User Profile"
         document.title = title;
         setHeading(title);
     }, [setHeading]);
-
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
-
     useEffect(() => {
         if (user) {
             reset(user);
         }
     }, [user, reset]);
-
     const onSubmit = async (data) => {
         setStatus("wait");
         try {
@@ -36,7 +31,6 @@ const Profile = () => {
                 phone: data.phone 
             };
             await updateUserProfile(profilePayload);
-
             if (showPasswordSection && data.newpassword) {
                 const passwordPayload = { 
                     new_password: data.newpassword, 
@@ -51,7 +45,6 @@ const Profile = () => {
             setStatus("success");
         }
     };
-
     return (
         <div className="max-w-4xl mx-auto">
             {status === "wait" && (<div className='text-center m-2'><span className="loading loading-bars loading-xl text-orange-500"></span></div>)}
@@ -86,7 +79,6 @@ const Profile = () => {
                         <label className="label font-bold text-gray-600 inline-flex items-center gap-1"><MapPin size={14}/> Address</label>
                         <input disabled={!editable} {...register("address", { required: true })} className="input input-bordered w-full rounded-2xl bg-gray-50 border-gray-100" />
                     </div>
-
                     {editable && (
                         <div className="md:col-span-2 mt-8">
                             <button type="button" onClick={() => setShowPasswordSection(!showPasswordSection)} className={`flex items-center gap-2 font-bold transition-all ${showPasswordSection ? 'text-red-500' : 'text-orange-600 hover:text-orange-700'}`}>
@@ -114,7 +106,6 @@ const Profile = () => {
                         </div>
                     )}
                 </div>
-
                 <div className="mt-12">
                     {!editable ? (
                         <button type="button" onClick={() => setEditable(true)} className="btn bg-orange-500 hover:bg-orange-600 border-none text-white w-full h-14 rounded-2xl text-lg font-bold shadow-xl shadow-orange-100 transition-all active:scale-95">
@@ -135,5 +126,4 @@ const Profile = () => {
         </div>
     );
 };
-
 export default Profile;

@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router';
-
 const NotFound = () => {
     useEffect(()=>{
         const title = "House For Rent - Page Not Found";
@@ -8,12 +7,9 @@ const NotFound = () => {
     }, [])
     return (
         <main className="min-h-screen flex items-center justify-center p-6 bg-orange-50/20 relative overflow-hidden">
-            {/* Background Decorations */}
             <div className="absolute top-1/4 -left-20 w-72 h-72 bg-orange-200 rounded-full blur-[100px] opacity-30 animate-pulse"></div>
             <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-orange-300 rounded-full blur-[120px] opacity-20"></div>
-
             <div className="max-w-2xl w-full text-center z-10">
-                {/* 404 Visual */}
                 <div className="relative inline-block mb-8">
                     <h1 className="text-[120px] md:text-[180px] font-black text-gray-200 leading-none select-none">
                         404
@@ -26,8 +22,6 @@ const NotFound = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* Text Content */}
                 <div className="space-y-4 px-4">
                     <h2 className="text-3xl md:text-4xl font-black text-gray-800 tracking-tight">
                         Oops! Page Not Found
@@ -36,8 +30,6 @@ const NotFound = () => {
                         The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
                     </p>
                 </div>
-
-                {/* Action Buttons */}
                 <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4">
                     <Link
                         to="/" 
@@ -48,7 +40,6 @@ const NotFound = () => {
                         </svg>
                         Back to Home
                     </Link>
-                    
                     <button 
                         onClick={() => window.location.reload()}
                         className="btn btn-ghost text-gray-400 hover:text-orange-600 hover:bg-orange-50 px-8 h-14 rounded-2xl text-lg font-bold w-full md:w-auto"
@@ -56,8 +47,6 @@ const NotFound = () => {
                         Try Again
                     </button>
                 </div>
-
-                {/* Quick Links */}
                 <div className="mt-16 pt-8 border-t border-gray-100 flex flex-wrap justify-center gap-6 text-sm font-bold text-gray-400 uppercase tracking-widest">
                     <Link to="/find" className="hover:text-orange-500 transition-colors">Find Homes</Link>
                     <Link to="/how" className="hover:text-orange-500 transition-colors">How it works</Link>
@@ -67,5 +56,4 @@ const NotFound = () => {
         </main>
     );
 };
-
 export default NotFound;

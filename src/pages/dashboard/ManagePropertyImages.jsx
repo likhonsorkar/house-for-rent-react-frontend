@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext, useParams, useNavigate } from 'react-router';
 import useAuthContext from '../../hooks/useAuthContext';
 import { ImagePlus, Trash2 } from 'lucide-react';
-
 const ManagePropertyImages = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -13,7 +12,6 @@ const ManagePropertyImages = () => {
     const [addImage, setAddImage] = useState([]);
     const [imageError, setImageError] = useState(null);
     const [adsDetail, setAdsDetail] = useState(null); 
-
     const fetchAdAndImages = async () => {
         setLoading(true);
         try {
@@ -21,34 +19,28 @@ const ManagePropertyImages = () => {
                 getAdDetails(id),
                 getAdImages(id)
             ]);
-
             if (!adDetailsRes) {
-                navigate('/dashboard'); // Ad not found
+                navigate('/dashboard');
                 return;
             }
-
             if (user && user.id !== adDetailsRes.data.owner) {
-                navigate('/dashboard'); // Not the owner
+                navigate('/dashboard');
                 return;
             }
-
             setAdsDetail(adDetailsRes.data);
             setPropertyImages(imagesRes.data);
             setLoading(false);
         } catch (err) {
             console.error(err);
             setLoading(false);
-            navigate('/dashboard'); // Error fetching, redirect
+            navigate('/dashboard');
         }
     };
-
     useEffect(() => {
         const title = "Manage Images"
         document.title = title;
         setHeading(title);
-        fetchAdAndImages();
-    }, [id, setHeading, user]); // Added user to dependencies for ownership check
-
+    }, []);
     useEffect(() => {
         if (successMSG) {
             fetchAdAndImages();
@@ -57,8 +49,6 @@ const ManagePropertyImages = () => {
             setImageError(null);
         }
     }, [successMSG]);
-
-
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
         setUpImage(files);
@@ -67,7 +57,6 @@ const ManagePropertyImages = () => {
             setImageError(null);
         }
     };
-
     const handleImageUpload = async () => {
         if (!upImage.length) {
             setImageError("Please select at least one image before uploading.");
@@ -76,7 +65,6 @@ const ManagePropertyImages = () => {
         setLoading(true);
         try {
             await AddAdsImage(upImage, id);
-            // success message will trigger refetch via useEffect
         } catch (error) {
             console.error("add property error: ", error);
             setImageError("Failed to upload images.");
@@ -84,30 +72,23 @@ const ManagePropertyImages = () => {
             setLoading(false);
         }
     };
-
     const handleDelete = async (imageId) => {
         if (!window.confirm("Are you sure you want to delete this image?")) return;
         setLoading(true);
         try {
             await deleteAdImage(id, imageId);
-            // success message will trigger refetch via useEffect
         } catch (error) {
             console.error("Failed to delete image:", error);
-            // setErrorMSG should be handled by useAuthContext
         } finally {
             setLoading(false);
         }
     };
-
     if (loading && !adsDetail) {
         return <div className='text-center m-2'><span className="loading loading-bars loading-xl text-orange-500"></span></div>;
     }
-    
     if (!adsDetail && !loading) {
         return <div className="text-center p-8">Property Images Not Found or Unauthorized</div>;
     }
-
-
     return (
         <div className="max-w-4xl mx-auto">
             {loading && (
@@ -138,7 +119,6 @@ const ManagePropertyImages = () => {
                         ))}
                     </div>
                 )}
-                
                 <h4 className="text-xl font-bold text-gray-800 mt-8 mb-4 border-t border-gray-100 pt-6">Upload New Images</h4>
                 <div>
                     <input 
@@ -158,7 +138,7 @@ const ManagePropertyImages = () => {
                             ))}
                         </div>
                     )}
-                    {upImage.length > 0 && ( // Only show upload button if files are selected
+                    {upImage.length > 0 && (
                         <button 
                             onClick={handleImageUpload} 
                             className="btn bg-orange-500 hover:bg-orange-600 border-none text-white w-full h-14 rounded-2xl text-lg font-bold shadow-xl shadow-orange-100 transition-all active:scale-95 mt-6"
@@ -171,6 +151,5 @@ const ManagePropertyImages = () => {
         </div>
     );
 };
-
 export default ManagePropertyImages;
 

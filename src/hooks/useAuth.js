@@ -4,25 +4,21 @@ const useAuth = () => {
     const [user, setUser] = useState(null);
     const [errorMSG, setErrorMSG] = useState("");
     const [successMSG, setSuccessMSG] = useState("");
-
     const getToken = () => {
         const token = localStorage.getItem("authTokens");
         return token ? JSON.parse(token) : null ;
     }
     const [authTokens, setAuthTokens] = useState(getToken());
-
     useEffect(() => {
         if (authTokens){
             fetchUserProfile();
         }
     }, [authTokens])
-
     useEffect(() => {
         if (successMSG) {
             const t = setTimeout(() => setSuccessMSG(""), 4000);
             return () => clearTimeout(t);
         }
-
         if (errorMSG) {
             const t = setTimeout(() => setErrorMSG(""), 4000);
             return () => clearTimeout(t);
@@ -53,7 +49,6 @@ const useAuth = () => {
             return false;
         }
     }
-
     const ChangePassword = async(data) => {
         setSuccessMSG("")
         setErrorMSG("");
@@ -70,7 +65,6 @@ const useAuth = () => {
                 return false;
         }
     }
-    
     const loginUser = async(userData) =>{
         setSuccessMSG("")
         setErrorMSG("");
@@ -135,7 +129,6 @@ const useAuth = () => {
             return false;
         }
     }
-
     const CreateAds = async(data) => {
         setSuccessMSG("")
         setErrorMSG("");
@@ -152,7 +145,6 @@ const useAuth = () => {
                 return null;
         }
     }
-
     const fetchMyAds = async () => {
         try {
             const response = await apiClient.get("/myads", {
@@ -164,7 +156,6 @@ const useAuth = () => {
             return null;
         }
     }
-
     const getAdDetails = async (adId) => {
         try {
             const headers = authTokens?.access ? { 'Authorization': `JWT ${authTokens?.access}` } : {};
@@ -175,7 +166,6 @@ const useAuth = () => {
             return null;
         }
     }
-
     const getAdImages = async (adId) => {
         try {
             const headers = authTokens?.access ? { 'Authorization': `JWT ${authTokens?.access}` } : {};
@@ -186,7 +176,6 @@ const useAuth = () => {
             return null;
         }
     }
-
     const updateAd = async(adId, data) => {
         setSuccessMSG("")
         setErrorMSG("");
@@ -203,7 +192,6 @@ const useAuth = () => {
                 return null;
         }
     }
-
    const AddAdsImage = async (data, adsId) => {
         let lastResponse = null;
         try {
@@ -224,7 +212,6 @@ const useAuth = () => {
             throw error;
         }
     };
-
     const deleteAdImage = async (adId, imageId) => {
         setSuccessMSG("");
         setErrorMSG("");
@@ -251,7 +238,6 @@ const useAuth = () => {
             return null;
         }
     }
-
     const addReview = async (adId, data) => {
         try {
             const response = await apiClient.post(`/ads/${adId}/reviews/`, data, {
@@ -266,7 +252,6 @@ const useAuth = () => {
             return null;
         }
     }
-
     const requestToRent = async (adId) => {
         setSuccessMSG("");
         setErrorMSG("");
@@ -283,7 +268,6 @@ const useAuth = () => {
             return null;
         }
     }
-
     const getAdRequests = async (adId) => {
         try {
             const response = await apiClient.get(`/ads/${adId}/requests/`, {
@@ -295,7 +279,6 @@ const useAuth = () => {
             return null;
         }
     }
-
     const acceptRequest = async (adId, requestId) => {
         setSuccessMSG("");
         setErrorMSG("");
@@ -312,7 +295,6 @@ const useAuth = () => {
             return null;
         }
     }
-
     const cancelRequest = async (adId, requestId) => {
         setSuccessMSG("");
         setErrorMSG("");
@@ -329,7 +311,6 @@ const useAuth = () => {
             return false;
         }
     }
-
     const getUserProfile = async (userId) => {
         try {
             const response = await apiClient.get(`/profile/${userId}/`);
@@ -339,7 +320,6 @@ const useAuth = () => {
             return null;
         }
     }
-    
     return { addReview, getReviews, getAdImages, getAdDetails, fetchMyAds, AddAdsImage, user, errorMSG,  setErrorMSG, successMSG, setSuccessMSG,  logoutUser, loginUser, signupUser, updateUserProfile, ChangePassword,  emailActivation, CreateAds, authTokens, updateAd, deleteAdImage, requestToRent, getAdRequests, acceptRequest, cancelRequest, getUserProfile};
 }
 export default useAuth;

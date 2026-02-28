@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Sidebar from '../components/dashboard/Sidebar';
 import { Link, Outlet } from 'react-router';
 import useAuthContext from '../hooks/useAuthContext';
-import { Bell, Plus } from 'lucide-react';
-
+import { Menu, Plus, X } from 'lucide-react';
 const DashboardLayout = () => {
     const {user, errorMSG, successMSG } = useAuthContext();
     const [heading, setHeading] = useState("Dashboard");
     const [loading, setLoading] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     return (
         <div className="min-h-screen bg-gray-50/50 flex flex-col lg:flex-row">
-            <Sidebar/>
+            <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen}/>
+            {isSidebarOpen && (
+                <div 
+                    className="fixed inset-0 bg-black/20 z-40 lg:hidden backdrop-blur-sm"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
             <main className="flex-1 p-4 md:p-8 lg:p-12 bg-gray-50/30 min-h-screen">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                    <button 
+                            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                            className="lg:hidden p-2 rounded-xl bg-white border border-gray-200 shadow-sm"
+                        >
+                            {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
                     <div>
                         <h1 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight flex items-center gap-3">
                             Dashboard 
@@ -24,19 +36,12 @@ const DashboardLayout = () => {
                             Welcome back, <span className="text-gray-800 font-bold">{user?.first_name || "User"}</span>! 
                         </p>
                     </div>
-
-
                     <div className="flex items-center gap-4">
-                        <button className="btn btn-ghost btn-circle bg-white border border-gray-100 shadow-sm relative">
-                            <span className="absolute top-2 right-2 w-2 h-2 bg-orange-500 rounded-full"></span>
-                            <Bell size={24} className="text-gray-500" />
-                        </button>
                         <Link to="/dashboard/addproperty" className="btn bg-orange-500 hover:bg-orange-600 border-none text-white rounded-2xl px-8 shadow-xl shadow-orange-100 font-bold transition-all transform hover:scale-105 inline-flex items-center gap-2">
                             <Plus size={20} /> Add Property
                         </Link>
                     </div>
                 </div>
-
                 {(successMSG || errorMSG) && (
                 <div className={`w-full py-3 px-4 animate-in slide-in-from-top duration-300 border-b ${
                     successMSG ? "bg-green-50 border-green-100" : "bg-red-50 border-red-100"
@@ -62,5 +67,4 @@ const DashboardLayout = () => {
         </div>
     );
 };
-
 export default DashboardLayout;

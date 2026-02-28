@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
 import apiClient from '../../services/api-client';
 import { CheckCircle, Clock, CreditCard } from 'lucide-react';
 import { useOutletContext } from 'react-router';
-
 const Invoice = () => {
     const { authTokens, setErrorMSG, setSuccessMSG } = useAuthContext();
     const { setHeading, setLoading, loading } = useOutletContext();
     const [invoices, setInvoices] = useState([]);
     const [payclick, setPayClick] = useState(false)
-
     useEffect(() => {
         const title = "Invoice"
         document.title = title;
         setHeading(title);
         fetchInvoices();
     }, []);
-
     const fetchInvoices = async () => {
         setLoading(true);
         try {
@@ -31,7 +28,6 @@ const Invoice = () => {
             setLoading(false);
         }
     };
-
     const handlePayNow = async(invoiceId) => {
         setLoading(true)
         setPayClick(true)
@@ -52,7 +48,6 @@ const Invoice = () => {
             console.log(error);
         }
     };
-
     return (
         <div>
             {loading && (
@@ -63,7 +58,6 @@ const Invoice = () => {
                     <p className="mt-4 text-gray-500 font-medium">Loading invoices...</p>
                 </div>
             )}
-
             {!loading && (
                 <div className="bg-white rounded-[2.5rem] shadow-xl shadow-gray-100 border border-gray-100 overflow-hidden mt-6">
                     <div className="overflow-x-auto">
@@ -146,5 +140,4 @@ const Invoice = () => {
         </div>
     );
 };
-
 export default Invoice;

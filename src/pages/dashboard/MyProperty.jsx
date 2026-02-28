@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Plus, ImageIcon, Pencil, Trash2, MapPin, Home } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import {ImageIcon, Pencil, Trash2, MapPin, Home } from 'lucide-react';
 import { Link, useOutletContext } from 'react-router';
 import useAuthContext from '../../hooks/useAuthContext';
-
 const MyProperty = () => {
     const { setHeading } = useOutletContext();
     const {authTokens, fetchMyAds} = useAuthContext();
-    const [status, setStatus] = useState("idle");
+    const [status, setStatus] = useState("wait");
     const [properties, setProperties] = useState({
         count: 0,
         next: null,
@@ -27,14 +26,12 @@ const MyProperty = () => {
             setStatus("error");
         }
     }
-
     useEffect(() => {
         const title = "My Properties"
         document.title = title;
         setHeading(title);
         query();
     }, []);
-
     return (
         <div className="max-w-6xl mx-auto p-4 md:p-0">
             <div className="bg-white rounded-[2.5rem] shadow-xl shadow-gray-100 border border-gray-100 overflow-hidden">
@@ -102,13 +99,11 @@ const MyProperty = () => {
                                                     <ImageIcon size={18} className="group-hover:scale-110 transition-transform" />
                                                 </button>
                                             </Link>
-                                            
                                             <Link to={`/dashboard/updateproperty/${item.id}`}>
                                                 <button className="p-3 bg-gray-50 text-gray-600 rounded-2xl hover:bg-gray-800 hover:text-white transition-all shadow-sm">
                                                     <Pencil size={18} />
                                                 </button>
                                             </Link>
-                                            
                                             <button 
                                                 className="p-3 bg-red-50 text-red-500 rounded-2xl transition-all shadow-sm cursor-not-allowed"
                                                 disabled

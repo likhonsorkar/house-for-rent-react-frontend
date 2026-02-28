@@ -24,6 +24,8 @@ import PaymentFailed from "../pages/dashboard/PaymentFailed";
 import PaymentCancel from "../pages/dashboard/PaymentCancel";
 import PaymentSuccess from "../pages/dashboard/PaymentSuccess";
 import UserList from "../pages/dashboard/UserList";
+import ResetPassword from "../pages/ResetPassword";
+import PasswordResetConfirm from "../pages/PasswordResetConfirm";
 
 const MyAppRoute = () => {
     return (
@@ -34,12 +36,14 @@ const MyAppRoute = () => {
                 <Route path="/signup" element={<Registrations/>} />
                 <Route path="/property" element={<Ads/>}/>
                 <Route path="/property/:id" element={<AdsDetails/>}/>
-                <Route path="/profile/:id" element={<ProfileView/>} /> {/* New route */}
+                <Route path="/profile/:id" element={<ProfileView/>} />
                 <Route path="/activate/:uid/:token" element={<EmailActivation/>} />
-                <Route path="*" element={<NotFound/>} />
-                <Route path="/payment/success" element={<PaymentSuccess/>} />
+                <Route path="/password/reset" element={<ResetPassword/>} />
+                <Route path="/password/reset/confirm/:uid/:token" element={<PasswordResetConfirm/>} />
+                <Route path="/payment/success/:tranId" element={<PaymentSuccess/>} />
                 <Route path="/payment/failed" element={<PaymentFailed/>} />
                 <Route path="payment/cancel" element={<PaymentCancel/>} />
+                <Route path="*" element={<NotFound/>} />
             </Route>
 
             <Route path="/dashboard" element={<PrivateRoute><DashboardLayout/></PrivateRoute>}>

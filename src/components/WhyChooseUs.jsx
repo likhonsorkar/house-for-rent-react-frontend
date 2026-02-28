@@ -1,6 +1,4 @@
-import React from 'react';
 import { ShieldCheck, Headset, Zap } from 'lucide-react';
-
 const features = [
   {
     name: 'Verified Listings',
@@ -18,7 +16,6 @@ const features = [
     icon: Zap,
   },
 ];
-
 const WhyChooseUs = () => {
   return (
     <div className="bg-gray-50 py-12">
@@ -32,7 +29,6 @@ const WhyChooseUs = () => {
             We provide a seamless and trustworthy experience for renters and landlords alike.
           </p>
         </div>
-
         <div className="mt-10">
           <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
             {features.map((feature) => (
@@ -52,5 +48,4 @@ const WhyChooseUs = () => {
     </div>
   );
 };
-
 export default WhyChooseUs;

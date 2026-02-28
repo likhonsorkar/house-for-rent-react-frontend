@@ -1,35 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useAuthContext from "../../hooks/useAuthContext";
-
 const ReviewForm = ({ adId, setReviews }) => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [loading, setLoading] = useState(false);
     const { user, addReview, errorMSG, successMSG } = useAuthContext();
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
         if (!user) {
             alert("You need to be logged in to leave a review.");
             setLoading(false);
             return;
         }
-
         if (rating === 0) {
             alert("Please provide a rating.");
             setLoading(false);
             return;
         }
-
         try {
             const response = await addReview(adId, {
                 rating,
                 comment,
             });
             if (response) {
-                // Ensure the new review has user info for immediate display
                 const newReview = {
                     ...response.data,
                     user: response.data.user && typeof response.data.user === 'object' 
@@ -46,7 +40,6 @@ const ReviewForm = ({ adId, setReviews }) => {
             setLoading(false);
         }
     };
-
     return (
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mt-8">
             <h3 className="text-xl font-bold text-gray-800 mb-4">Leave a Review</h3>

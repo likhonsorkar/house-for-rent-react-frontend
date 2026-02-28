@@ -98,8 +98,6 @@ const UserList = () => {
                     </table>
                 </div>
             </div>
-
-            {/* Profile Modal */}
             {selectedUser && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
                     <div className="bg-white rounded-[3rem] max-w-lg w-full p-8 relative shadow-2xl animate-in zoom-in duration-300">
@@ -109,7 +107,6 @@ const UserList = () => {
                         >
                             <X size={24} />
                         </button>
-
                         <div className="text-center">
                             {selectedUser.profile_image ? (
                                 <img src={selectedUser.profile_image} className="w-24 h-24 rounded-[2rem] mx-auto object-cover border-4 border-orange-50 mb-4" alt="Profile" />
@@ -120,9 +117,7 @@ const UserList = () => {
                             )}
                             <h3 className="text-2xl font-black text-gray-800">{selectedUser.first_name} {selectedUser.last_name}</h3>
                             <p className="text-orange-500 font-bold text-xs uppercase tracking-widest mt-1 italic">{selectedUser.bio || "Active Member"}</p>
-                            
                             <hr className="my-6 border-gray-100" />
-
                             <div className="space-y-4 text-left">
                                 <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-2xl">
                                     <div className="bg-white p-2 rounded-xl text-gray-400 shadow-sm"><Mail size={20} /></div>

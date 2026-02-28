@@ -14,11 +14,10 @@ const steps = [
   },
   {
     name: 'Move In',
-    description: 'Finalize the paperwork and get the keys to your new home. It is that simple.',
+    description: 'Finalize Request a rent and when owner accept request you just payment invoice and confirm book.',
     icon: Key,
   },
 ];
-
 const HowItWorks = () => {
   return (
     <div id="how-it-works" className="bg-white py-12">
@@ -52,5 +51,4 @@ const HowItWorks = () => {
     </div>
   );
 };
-
 export default HowItWorks;

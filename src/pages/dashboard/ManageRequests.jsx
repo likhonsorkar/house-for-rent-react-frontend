@@ -29,7 +29,28 @@ const ManageRequests = () => {
         }
     }
     const handleAccept = async(id) => {
+        setLoading(true);
 
+    try {
+        const response = await apiClient.post(
+            `/owner-requests/${id}/accept/`,
+                { is_accepted: true },
+                {
+                    headers: { 
+                        Authorization: `JWT ${authTokens?.access}` 
+                    },
+                }
+            );
+            if (response && (response.status === 200 || response.status === 201)) {
+                fetchRequest();  
+                setSuccessMSG("Request Accepted");
+            }
+
+        } catch (error) {
+            console.error("Failed to accept request:", error);
+        } finally {
+            setLoading(false);
+        }
     }
     return (
         <div>

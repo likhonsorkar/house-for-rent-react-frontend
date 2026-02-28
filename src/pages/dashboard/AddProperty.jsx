@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useOutletContext } from 'react-router';
 import useAuthContext from '../../hooks/useAuthContext';
 import { FilePlus, ImagePlus, BedDouble, Bath, Building, Calendar, Map, Home, Phone, Mail } from 'lucide-react';
-
 const AddProperty = () => {
     const navigate = useNavigate();
     const { CreateAds, AddAdsImage } = useAuthContext();
@@ -12,13 +11,11 @@ const AddProperty = () => {
     const [upImage, setUpImage] = useState([]);
     const [imageError, setImageError] = useState(null);
     const { setHeading, setLoading, loading } = useOutletContext();
-
     useEffect(() => {
         const title = "Add Property"
         document.title = title;
         setHeading(title);
     }, []);
-
     const PROPERTY_CATEGORIES = [
         { value: "family", label: "Family" },
         { value: "Bachelor", label: "Bachelor" },
@@ -27,9 +24,7 @@ const AddProperty = () => {
         { value: "Hostel", label: "Hostel" },
         { value: "Shop", label: "Shop" },
     ];
-
     const { register, handleSubmit, formState: { errors } } = useForm();
-    
     const onSubmit = async (data) => {
         setLoading(true);
         const response = await CreateAds(data);
@@ -38,7 +33,6 @@ const AddProperty = () => {
         }
         setLoading(false);
     }
-
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
         setUpImage(files);
@@ -47,7 +41,6 @@ const AddProperty = () => {
             setImageError(null);
         }
     }
-
     const handleImageUpload = async () => {
         if (!upImage.length) {
             setImageError("Please select at least one image before uploading.");
@@ -65,7 +58,6 @@ const AddProperty = () => {
             setLoading(false);
         }
     }
-
     return (
         <div className="max-w-4xl mx-auto">
             {loading && (
@@ -111,7 +103,6 @@ const AddProperty = () => {
                                     <option value="monthly" selected>Monthly</option>
                                 </select>
                             </div>
-
                             <div className="md:col-span-2 border-b border-gray-100 pb-4 my-4 flex items-center gap-3">
                                 <Home className="text-orange-500" size={28}/>
                                 <h3 className="text-2xl font-black text-gray-800">Apartment Details</h3>
@@ -142,7 +133,6 @@ const AddProperty = () => {
                                 <label className="label font-bold text-gray-600 inline-flex items-center gap-1"><Map size={14}/> Full Address</label>
                                 <input {...register("address", { required: "Address is required" })} className="input input-bordered w-full rounded-2xl bg-gray-50 border-gray-100" />
                             </div>
-
                             <div className="md:col-span-2 border-b border-gray-100 pb-4 my-4 flex items-center gap-3">
                                 <Phone className="text-orange-500" size={28}/>
                                 <h3 className="text-2xl font-black text-gray-800">Contact Information</h3>
@@ -190,5 +180,4 @@ const AddProperty = () => {
         </div>
     );
 };
-
 export default AddProperty;

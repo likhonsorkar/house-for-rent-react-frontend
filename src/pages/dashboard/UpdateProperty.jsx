@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useOutletContext, useParams } from 'react-router';
 import useAuthContext from '../../hooks/useAuthContext';
 import { FilePen, BedDouble, Bath, Building, Calendar, Map, Home, Phone, Mail } from 'lucide-react';
-
 const UpdateProperty = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -19,7 +18,6 @@ const UpdateProperty = () => {
     ];
     const { setHeading, setLoading, loading } = useOutletContext();
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
-
     useEffect(() => {
         const title = "Update Property"
         document.title = title;
@@ -37,11 +35,10 @@ const UpdateProperty = () => {
                 setLoading(false);
             });
     }, [id, setHeading, setLoading, getAdDetails]);
-
     useEffect(() => {
         if (adsDetail) {
             if (user && user.id !== adsDetail.owner) {
-                navigate('/dashboard'); // Redirect if not owner
+                navigate('/dashboard');
             }
             Object.keys(adsDetail).forEach((key) => {
                 if(key === 'avaiable_from'){
@@ -66,18 +63,16 @@ const UpdateProperty = () => {
             setLoading(false);
         }
     };
-
     if (loading && !adsDetail) {
         return <div className='text-center m-2'><span className="loading loading-bars loading-xl text-orange-500"></span></div>;
     }
-
     if (!adsDetail && !loading) {
         return <div className="text-center p-8">Property Not Found</div>;
     }
-    
     return (
         <div className="max-w-4xl mx-auto">
-            <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl shadow-gray-100 border border-gray-100">
+            {!loading && (
+                <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl shadow-gray-100 border border-gray-100">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="md:col-span-2 border-b border-gray-100 pb-4 mb-4 flex items-center gap-3">
                         <FilePen className="text-orange-500" size={28}/>
@@ -143,7 +138,6 @@ const UpdateProperty = () => {
                         <Home className="text-orange-500" size={28}/>
                         <h3 className="text-2xl font-black text-gray-800">Apartment Details</h3>
                     </div>
-
                     <div className="grid grid-cols-3 gap-4 md:col-span-2">
                         <div>
                             <label className="label font-bold text-gray-600 inline-flex items-center gap-1"><BedDouble size={14}/> Bedrooms</label>
@@ -158,38 +152,31 @@ const UpdateProperty = () => {
                             <input type="number" {...register("balcony", { valueAsNumber: true, required:"If no balcony, please enter 0."})} className="input input-bordered w-full rounded-2xl bg-gray-50 border-gray-100" />
                         </div>
                     </div>
-
                     <div>
                         <label className="label font-bold text-gray-600">Area</label>
                         <input {...register("area", {required: "Area is required"})} placeholder="Ex. Dhaka, Mohammadpur" className="input input-bordered w-full rounded-2xl bg-gray-50 border-gray-100" />
                     </div>
-
                     <div>
                         <label className="label font-bold text-gray-600 inline-flex items-center gap-1"><Calendar size={14}/> Available From</label>
                         <input type="date" {...register("avaiable_from", {required: "Please select the date this property is available from."})} className="input input-bordered w-full rounded-2xl bg-gray-50 border-gray-100" />
                     </div>
-
                     <div className="md:col-span-2">
                         <label className="label font-bold text-gray-600 inline-flex items-center gap-1"><Map size={14}/> Full Address</label>
                         <input {...register("address", { required: "Address is required" })} className="input input-bordered w-full rounded-2xl bg-gray-50 border-gray-100" />
                     </div>
-
                     <div className="md:col-span-2 border-b border-gray-100 pb-4 my-4 flex items-center gap-3">
                         <Phone className="text-orange-500" size={28}/>
                         <h3 className="text-2xl font-black text-gray-800">Contact Information</h3>
                     </div>
-
                     <div>
                         <label className="label font-bold text-gray-600">Phone</label>
                         <input {...register("contact_phone", { required: "Contact phone is required" })} className="input input-bordered w-full rounded-2xl bg-gray-50 border-gray-100" />
                     </div>
-
                     <div>
                         <label className="label font-bold text-gray-600 inline-flex items-center gap-1"><Mail size={14}/> Email</label>
                         <input {...register("contact_email")} className="input input-bordered w-full rounded-2xl bg-gray-50 border-gray-100" />
                     </div>
                 </div>
-
                 <div className="mt-8">
                     <button 
                         type="submit" 
@@ -199,8 +186,8 @@ const UpdateProperty = () => {
                     </button>
                 </div>
             </form>
+            )}
         </div>
     );
 };
-
 export default UpdateProperty;

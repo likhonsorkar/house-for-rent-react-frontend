@@ -3,7 +3,6 @@ import FilterBar from '../components/FilterBar';
 import ListingCards from '../components/ads/ListingCards';
 import apiClient from '../services/api-client';
 import Pagination from '../components/Pagination';
-
 const Ads = () => {
     const [properties, setProperties] = useState({
                     count: 0,
@@ -45,32 +44,26 @@ const Ads = () => {
     }
     return (
             <>
-            {/* Search & Filter Section */}
             <FilterBar categories={PROPERTY_CATEGORIES} setFilters={setFilters} filters={filters} onApply={() => {setCurrentPages(1); query(); console.log(filters); setStatus("wait") } }/>
             {status == "wait" && (<div className='text-center m-2'><span className="loading loading-bars loading-xl text-orange-500"></span></div>)}
             {status == "success" && (
                 <main className="container mx-auto px-4 py-8 flex-grow">
-                {/* Results Header */}
                 <div className="flex justify-between items-center mb-8">
                 <h1 className="text-2xl font-black text-gray-800">
                     Available <span className="text-orange-500">Ads Listings</span>
                     <span className="ml-2 text-sm font-medium text-gray-400">({properties.count} results)</span>
                 </h1>
                 </div>
-
-                {/* Property Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {properties.results.length == 0 && (<span>No Ads Found</span>)}
                 {properties.results.map(item => (
                     <ListingCards key={item.id} data={item}/>
                 ))}
                 </div>
-                {/* Pagination */}
                 <Pagination totalpages = {totalPages} currentpage = {currentPages} handlepagechange = {setCurrentPages} setloading={setStatus}/>
             </main>
             )}
         </>
     );
 };
-
 export default Ads;

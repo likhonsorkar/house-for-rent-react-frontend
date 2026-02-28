@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Wallet, ArrowUpRight, ArrowDownLeft, Clock, AlertCircle, Banknote, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Wallet, ArrowUpRight, ArrowDownLeft , AlertCircle, Banknote, X } from 'lucide-react';
 import useAuthContext from '../../hooks/useAuthContext';
 import apiClient from '../../services/api-client';
 import { useOutletContext } from 'react-router';
-
 const WalletDashboard = () => {
     const { authTokens } = useAuthContext();
     const [wallet, setWallet] = useState(null);
     const [showWithdrawModal, setShowWithdrawModal] = useState(false);
     const { setHeading, setLoading, loading } = useOutletContext();
-
     useEffect(() => {
         const title = "My Wallet"
         document.title = title;
         setHeading(title);
         fetchWalletData();
     }, []);
-
     const fetchWalletData = async () => {
         setLoading(true);
         try {
@@ -30,20 +27,16 @@ const WalletDashboard = () => {
             setLoading(false);
         }
     };
-
     if (loading) return (
         <div className="p-20 text-center">
             <span className="loading loading-bars loading-xl text-orange-500"></span>
             <p className="mt-4 text-gray-400 font-medium">Syncing Wallet...</p>
         </div>
     );
-
     return (
         <div className="max-w-6xl mx-auto p-4 space-y-8 animate-in fade-in duration-500">
-            
             {/* Main Section */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                
                 {/* Balance Card */}
                 <div className="lg:col-span-2 bg-gradient-to-br from-gray-900 to-black rounded-[3rem] p-10 text-white relative overflow-hidden shadow-2xl">
                     <div className="relative z-10">
@@ -58,7 +51,6 @@ const WalletDashboard = () => {
                                 <Wallet size={32} className="text-white" />
                             </div>
                         </div>
-
                         <div className="mt-12 flex items-center gap-6">
                             <button 
                                 onClick={() => setShowWithdrawModal(true)}
@@ -74,7 +66,6 @@ const WalletDashboard = () => {
                     {/* Decorative Background */}
                     <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px]"></div>
                 </div>
-
                 {/* Status/Security Card */}
                 <div className="bg-white rounded-[3rem] border border-gray-100 p-8 shadow-sm flex flex-col justify-center items-center text-center">
                     <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-4">
@@ -84,7 +75,6 @@ const WalletDashboard = () => {
                     <p className="text-gray-400 text-sm mt-2">All transactions are encrypted and secured by SSLCommerz technology.</p>
                 </div>
             </div>
-
             {/* Transactions Section */}
             <div className="space-y-4">
                 <h3 className="text-2xl font-black text-gray-800 px-4">Recent Transactions</h3>
@@ -131,7 +121,6 @@ const WalletDashboard = () => {
                     </table>
                 </div>
             </div>
-
             {/* Withdraw Modal */}
             {showWithdrawModal && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
@@ -165,5 +154,4 @@ const WalletDashboard = () => {
         </div>
     );
 };
-
 export default WalletDashboard;

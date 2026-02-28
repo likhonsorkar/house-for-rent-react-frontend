@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CheckCircle, XCircle, Clock, MapPin, Tag, Image } from 'lucide-react';
 import { useOutletContext, Link } from 'react-router';
 import apiClient from '../../services/api-client';
 import useAuthContext from '../../hooks/useAuthContext';
-
 const ApproveAds = () => {
-    const { setHeading } = useOutletContext();
+    const { setHeading, loading, setLoading } = useOutletContext();
     const { authTokens, setSuccessMSG, setErrorMSG } = useAuthContext();
     const [ads, setAds] = useState([]);
-    const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         const title = "Pending Ads"
         document.title = title;
         setHeading(title);
         fetchPendingAds();
     }, []);
-
     const fetchPendingAds = async () => {
         setLoading(true);
         try {
@@ -31,7 +27,6 @@ const ApproveAds = () => {
             setLoading(false);
         }
     };
-
     const handleAction = async (id) => {
         setLoading(true);
         try {
@@ -47,7 +42,6 @@ const ApproveAds = () => {
             fetchPendingAds();
         }
     };
-
     return (
         <div className="max-w-6xl mx-auto p-4 md:p-0">
             <div className="flex justify-between items-center mb-6">
@@ -113,14 +107,6 @@ const ApproveAds = () => {
                                             >
                                                 <CheckCircle size={20} />
                                             </button>
-
-                                
-                                            {/* <button 
-                                                className="flex items-center justify-center p-3 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white hover:scale-105 transition-all duration-200 shadow-sm"
-                                                title="Reject"
-                                            >
-                                                <XCircle size={20} />
-                                            </button> */}
                                         </div>
                                     </td>
                                 </tr>
@@ -145,5 +131,4 @@ const ApproveAds = () => {
         </div>
     );
 };
-
 export default ApproveAds;

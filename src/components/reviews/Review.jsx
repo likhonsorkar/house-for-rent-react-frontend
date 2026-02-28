@@ -1,13 +1,8 @@
-import React from "react";
 import useAuthContext from "../../hooks/useAuthContext";
 import apiClient from "../../services/api-client";
-
 const Review = ({ reviews, adId, setReviews }) => {
     const { user, authTokens } = useAuthContext();
-
     const handleDelete = async (reviewId) => {
-        if (!window.confirm("Are you sure you want to delete this review?")) return;
-        
         try {
             await apiClient.delete(`/ads/${adId}/reviews/${reviewId}/`, {
                 headers: { Authorization: `JWT ${authTokens?.access}` },
@@ -19,7 +14,6 @@ const Review = ({ reviews, adId, setReviews }) => {
             alert(error.response?.data?.detail || "Failed to delete review");
         }
     };
-
     return (
         <div className="mt-8">
             <h2 className="text-2xl font-bold text-gray-800 border-l-4 border-orange-500 pl-4 mb-6">Reviews</h2>
@@ -34,7 +28,6 @@ const Review = ({ reviews, adId, setReviews }) => {
                         const fullName = `${firstName} ${lastName}`.trim() || userProfile?.username || (typeof userProfile === 'string' ? userProfile : "Anonymous");
                         const profileImage = userProfile?.profile_image;
                         const initial = fullName.charAt(0).toUpperCase();
-                        
                         return (
                             <div key={review.id} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                                 <div className="flex items-center mb-3">

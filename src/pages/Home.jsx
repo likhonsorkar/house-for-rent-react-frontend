@@ -3,7 +3,6 @@ import CTASection from "../components/CTASections";
 import FeaturedListings from "../components/FeaturedListings";
 import Hero from "../components/Hero";
 import HowItWorks from "../components/HowItWorks";
-import Testimonials from "../components/Testimonials";
 import WhyChooseUs from "../components/WhyChooseUs";
 import apiClient from "../services/api-client";
 const Home = () => {
@@ -35,7 +34,6 @@ const Home = () => {
         {status == "success" && (<FeaturedListings properties={properties.results.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 6)} />)}
         <WhyChooseUs />
         <HowItWorks />
-        <Testimonials />
         <CTASection />
       </main>
     );

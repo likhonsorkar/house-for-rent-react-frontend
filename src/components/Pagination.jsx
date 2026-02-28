@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Pagination = ({totalpages, currentpage, handlepagechange, setloading }) => {
     return (
         <div className="flex justify-center mt-16 mb-10">
@@ -13,5 +11,4 @@ const Pagination = ({totalpages, currentpage, handlepagechange, setloading }) =>
         </div>
     );
 };
-
 export default Pagination;

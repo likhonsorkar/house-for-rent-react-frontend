@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import useAuthContext from '../hooks/useAuthContext';
 import { Mail, Phone, MapPin } from 'lucide-react';
-
 const ProfileView = () => {
     const { id } = useParams();
     const { getUserProfile } = useAuthContext();
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
     useEffect(() => {
         const fetchProfile = async () => {
             setLoading(true);
@@ -29,12 +27,10 @@ const ProfileView = () => {
                 setLoading(false);
             }
         };
-
         if (id) {
             fetchProfile();
         }
     }, []);
-
     if (loading) {
         return (
             <main className="container mx-auto px-4 py-8 text-center">
@@ -43,7 +39,6 @@ const ProfileView = () => {
             </main>
         );
     }
-
     if (error) {
         return (
             <main className="container mx-auto px-4 py-8 text-center text-red-500 font-bold">
@@ -51,7 +46,6 @@ const ProfileView = () => {
             </main>
         );
     }
-
     if (!profile) {
         return (
             <main className="container mx-auto px-4 py-8 text-center text-gray-500">
@@ -59,7 +53,6 @@ const ProfileView = () => {
             </main>
         );
     }
-
     return (
         <main className="container mx-auto px-4 py-8">
             <div className="max-w-3xl mx-auto bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl shadow-gray-100 border border-gray-100">

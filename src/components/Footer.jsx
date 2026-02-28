@@ -1,7 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router';
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
-
 const Footer = () => {
     const socialLinks = [
         { icon: Facebook, url: "https://facebook.com" },

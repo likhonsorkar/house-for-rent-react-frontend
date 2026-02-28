@@ -1,12 +1,9 @@
-import { Link, useNavigate, useLocation } from "react-router";
+import { Link, useNavigate} from "react-router";
 import useAuthContext from "../hooks/useAuthContext";
 import { LogOut, User, Settings, UserCircle, LayoutDashboard } from 'lucide-react';
-
 const Header = () => {
     const {user, logoutUser, successMSG, errorMSG} = useAuthContext();
     const urlNavigator = useNavigate();
-    const location = useLocation();
-
     const navLinks = (
         <>
             <li><Link to="/property" className="hover:text-orange-500 font-medium">Find a Home</Link></li>
@@ -17,10 +14,7 @@ const Header = () => {
     const authnavLinks = (
         <>
             <li><Link to="/property" className="hover:text-orange-500 font-medium">Find a Home</Link></li>
-            <li>
-                {/* NOTE: Using <a> tag as client-side navigation with Link from 'react-router' is broken by user's request. */}
-                <a href="/dashboard" className="hover:text-orange-500 font-medium">Dashboard</a>
-            </li>
+            <li><a href="/dashboard" className="hover:text-orange-500 font-medium">Dashboard</a></li>
             <li><Link to="/dashboard/addproperty" className="hover:text-orange-500 font-medium">List Property</Link></li>
             <li><Link to="/#how-it-works" className="hover:text-orange-500 font-medium">How it works</Link></li>
         </>
@@ -29,7 +23,6 @@ const Header = () => {
         logoutUser();
         urlNavigator("/login");
     };
-
     return (
         <>
         <header className="navbar bg-white/90 backdrop-blur-md border-b border-orange-100 sticky top-0 z-50 px-2 md:px-8">
@@ -44,7 +37,6 @@ const Header = () => {
                         {!user ? navLinks : authnavLinks}
                     </ul>
                 </div>
-                
                 <div className="flex items-center gap-2 cursor-pointer ml-2 lg:ml-0">
                     <div className="bg-orange-500 p-1.5 md:p-2 rounded-lg shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="white" className="w-5 h-5 md:w-6 md:h-6">
@@ -56,13 +48,11 @@ const Header = () => {
                     </Link>
                 </div>
             </div>
-
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-2 text-gray-600">
                     {!user ? navLinks : authnavLinks}
                 </ul>
             </div>
-
             <div className="navbar-end gap-1 md:gap-3">
                 {!user ? (
                 <div>
